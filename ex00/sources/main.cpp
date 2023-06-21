@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcatal-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:09:09 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/21 15:11:29 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:11:59 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int main(int argc, char **argv)
         std::cout << "Wrong input" << std::endl;
         return 1;
     }
-    convert(argv[1]);
+    ScalarConverter::convert(argv[1]);
 }
