@@ -6,7 +6,7 @@
 /*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:56:25 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/22 15:24:16 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:33:48 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <unistd.h>
 
 class Base
 {

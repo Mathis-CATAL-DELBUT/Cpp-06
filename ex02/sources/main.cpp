@@ -6,7 +6,7 @@
 /*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 15:00:07 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/22 15:23:08 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:07:33 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 Base* generate(void)
 {
-    std::srand(std::time(0));
-    int randomValue = (std::rand() % 3);
-    if (randomValue == 0)
+    std::srand(std::time(NULL));
+    int randomValue = (std::rand() % 3) + 1;
+    if (randomValue == 1)
         return new A;
-    else if (randomValue == 1)
+    else if (randomValue == 2)
         return new B;
     else
         return new C;
@@ -27,32 +27,50 @@ Base* generate(void)
 void identify(Base* p)
 {
     if (dynamic_cast<A*>(p))
-        std::cout << "A" << std::endl;
+        std::cout << "Class A" << std::endl;
     else if (dynamic_cast<B*>(p))
-        std::cout << "B" << std::endl;
+        std::cout << "Class B" << std::endl;
     else
-        std::cout << "C" << std::endl;
+        std::cout << "Class C" << std::endl;
 }
 
 void identify(Base& p)
 {
-    (void)p;
-    // if (dynamic_cast<A>(p))
-    //     std::cout << "A" << std::endl;
-    // else if (dynamic_cast<B>(p))
-    //     std::cout << "B" << std::endl;
-    // else 
-    //     std::cout << "C" << std::endl;
+    try
+    {
+        A &a = dynamic_cast<A&>(p);
+        std::cout << "Class A" << std::endl;
+        (void)a;
+    }
+    catch(const std::exception& e)
+    {
+        try
+        {
+            B &b = dynamic_cast<B&>(p);
+            std::cout << "Class B" << std::endl;
+            (void)b;
+        }
+        catch(const std::exception& e)
+        {
+            try
+            {
+                C &c = dynamic_cast<C&>(p);
+                std::cout << "Class C" << std::endl;
+                (void)c;
+            }
+            catch(const std::exception& e)
+            {
+                std::cerr << e.what() << '\n';
+            }
+        }
+    }
 }
 
 int main()
 {
-    Base *first = generate();
-    Base *second = generate();
-    Base *troisieme = generate();
+    Base *base = generate();
 
-    identify(first);
-    identify(second);
-    identify(troisieme);
+    identify(base);
+    identify(*base);
     return 0;
 }
