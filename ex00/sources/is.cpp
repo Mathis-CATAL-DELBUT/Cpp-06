@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is.cpp                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatal-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:13:58 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/21 23:15:36 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:27:32 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,24 @@
 #include <string>
 #include <stdexcept>
 #include <float.h>
+#include <limits>
 #include <limits.h>
+#include <sstream>
+
+bool convertStringToInt(const std::string& str, int& result) {
+    std::istringstream iss(str);
+    return !(iss >> result).fail();
+}
+
+bool convertStringToFloat(const std::string& str, float& result) {
+    std::istringstream iss(str);
+    return !(iss >> result).fail();
+}
+
+bool convertStringToDouble(const std::string& str, double& result) {
+    std::istringstream iss(str);
+    return !(iss >> result).fail();
+}
 
 bool is_int(const std::string& str)
 {
@@ -31,11 +48,7 @@ bool is_int(const std::string& str)
             return false;
         i++;
     }
-    try
-    {nbr = std::stoi(str);}
-    catch (const std::out_of_range& e)
-    {return false;}
-    if (nbr < -2147483648 || nbr > 2147483647)
+    if (!convertStringToInt(str, nbr) || nbr < -2147483648 || nbr > 2147483647)
         return false;
     return true;
 }
@@ -51,7 +64,7 @@ bool is_float(const std::string& str)
 {
     unsigned long i = 0;
     int point = 0;
-    int nbr;
+    float nbr;
     
     if (str[0] == '-')
         i++;
@@ -65,13 +78,9 @@ bool is_float(const std::string& str)
             return false;
         i++;
     }
-    if (point != 1 || str[i] != 'f')
+    if (point != 1 || str[i] != 'f' || !convertStringToFloat(str, nbr))
         return false;
-    try
-    {nbr = std::stof(str);}
-    catch (const std::out_of_range& e)
-    {return false;}
-    if (nbr < FLT_MIN || nbr > FLT_MAX)
+    if (nbr < std::numeric_limits<float>::lowest() || nbr > std::numeric_limits<float>::max())
         return false;
     return true;
 }
@@ -80,7 +89,7 @@ bool is_double(const std::string& str)
 {
     int i = 0;
     int point = 0;
-    int nbr;
+    double nbr = 0;
     
     if (str[0] == '-')
         i++;
@@ -94,11 +103,9 @@ bool is_double(const std::string& str)
             return false;
         i++;
     }
-    if (point != 1)
+    if (!convertStringToDouble(str, nbr) || point != 1)
         return false;
-    try {nbr = std::stod(str);}
-    catch (const std::out_of_range& e) {return false;}
-    if (0 > 2.22507e-308|| nbr > DBL_MAX)
+    if (nbr < std::numeric_limits<double>::lowest() || nbr > std::numeric_limits<double>::max())
         return false;
     return true;
 }
