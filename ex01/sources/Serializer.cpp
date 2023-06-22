@@ -6,7 +6,7 @@
 /*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:36:57 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/22 14:40:21 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:52:42 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,10 @@ Serializer &    Serializer::operator=(Serializer const & rhs)
 
 uintptr_t       Serializer::serialize(Data* ptr)
 {
-    uintptr_t   raw;
-
-    raw = reinterpret_cast<uintptr_t>(ptr);
-    return (raw);
+    return(reinterpret_cast<uintptr_t>(ptr));
 }
 
 Data*           Serializer::deserialize(uintptr_t raw)
 {
-    Data*   ptr;
-
-    ptr = reinterpret_cast<Data*>(raw);
-    return (ptr);
+    return(reinterpret_cast<Data*>(raw));
 }
