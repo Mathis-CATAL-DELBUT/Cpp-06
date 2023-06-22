@@ -6,19 +6,11 @@
 /*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:13:58 by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/22 13:27:32 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:15:40 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ScalarConvert"
-
-#include <iostream>
-#include <string>
-#include <stdexcept>
-#include <float.h>
-#include <limits>
-#include <limits.h>
-#include <sstream>
+#include "ScalarConvert.hpp"
 
 bool convertStringToInt(const std::string& str, int& result) {
     std::istringstream iss(str);
@@ -80,7 +72,7 @@ bool is_float(const std::string& str)
     }
     if (point != 1 || str[i] != 'f' || !convertStringToFloat(str, nbr))
         return false;
-    if (nbr < std::numeric_limits<float>::lowest() || nbr > std::numeric_limits<float>::max())
+    if (nbr < std::numeric_limits<float>::min() || nbr > std::numeric_limits<float>::max())
         return false;
     return true;
 }
@@ -105,7 +97,7 @@ bool is_double(const std::string& str)
     }
     if (!convertStringToDouble(str, nbr) || point != 1)
         return false;
-    if (nbr < std::numeric_limits<double>::lowest() || nbr > std::numeric_limits<double>::max())
+    if (nbr < std::numeric_limits<double>::min() || nbr > std::numeric_limits<double>::max())
         return false;
     return true;
 }

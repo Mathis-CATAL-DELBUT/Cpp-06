@@ -6,7 +6,7 @@
 /*   By: mcatal-d <mcatal-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by mcatal-d          #+#    #+#             */
-/*   Updated: 2023/06/22 13:52:07 by mcatal-d         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:13:04 by mcatal-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void ScalarConverter::convert(const std::string& str)
     }
     else if (is_int(str))
     {
-        int nbr = std::stoi(str);
+        int nbr ;
+        convertStringToInt(str, nbr);
         if (nbr >= 32 && nbr <= 126)
             std::cout << "char: '" << static_cast<char>(nbr) << "'" << std::endl;
         else if ((nbr >= 0 && nbr < 32) || nbr == 127)
@@ -63,7 +64,8 @@ void ScalarConverter::convert(const std::string& str)
     }
     else if (is_float(str))
     {
-        float nbr = std::stof(str);
+        float nbr;
+        convertStringToFloat(str, nbr);
         if (nbr >= 32 && nbr <= 126)
             std::cout << "char: '" << static_cast<char>(nbr) << "'" << std::endl;
         else if ((nbr >= 0 && nbr < 32) || nbr == 127)
@@ -79,7 +81,8 @@ void ScalarConverter::convert(const std::string& str)
     }
     else if (is_double(str))
     {
-        double nbr = std::stod(str);
+        double nbr;
+        convertStringToDouble(str, nbr);
         if (nbr >= 32 && nbr <= 126)
             std::cout << "char: '" << static_cast<char>(nbr) << "'" << std::endl;
         else if ((nbr >= 0 && nbr < 32) || nbr == 127)
